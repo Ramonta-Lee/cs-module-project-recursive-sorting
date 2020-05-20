@@ -17,6 +17,7 @@ class RecursiveSortingTests(unittest.TestCase):
         self.assertEqual(merge_sort(arr4), [0, 1, 2, 3, 4, 5])
         self.assertEqual(merge_sort(arr5), sorted(arr5))
 
+    
     def test_in_place_merge_sort(self):
         arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
         arr2 = []
