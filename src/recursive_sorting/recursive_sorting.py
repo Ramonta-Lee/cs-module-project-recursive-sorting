@@ -66,14 +66,18 @@ def merge_sort(arr):
        
 
 def merge_in_place(arr, start, mid, end):
-    # Your code here
+	# start2 is the first element in the right
+	# half of the list
     start2 = mid + 1
-
+    # If the two halves we're merging are already
+	# sorted, no need to do anything
     if arr[mid] <= arr[start2]:
         return
-    
+    # Two pointers to maintain start
+    # of both arrays to merge
     while start <= mid and start2 <= end:
-        # first element is in correct place
+
+        # If element 1 is in right place
         if arr[start] <= arr[start2]:
             start += 1
 
@@ -81,51 +85,38 @@ def merge_in_place(arr, start, mid, end):
             value = arr[start2]
             index = start2
 
+            # Shift all the elements between element 1
+            # element 2, right by 1.
             while index != start:
                 arr[index] = arr[index - 1]
                 index -= 1
 
             arr[start] = value
 
+            # Update all the pointers
             start += 1
             mid += 1
             start2 += 1
-
     return arr
-
+			
+	# we don't return anything in in-place functions
+	# since we're directly mutating the input array
 
 def merge_sort_in_place(arr, l, r):
-    # Your code here
-    if l <= r:
-        mid = 1 + (r - 1) // 2
+    if l < r:
+        # Same as (l + r) / 2, but avoids overflow
+        # for large l and r
+        # this finds the middle of l and r not necessarily the middle of the arr
+        m = l + (r - l) // 2
 
-        merge_sort_in_place(arr, l, mid)
-        merge_sort_in_place(arr, mid + 1, r)
+        # Sort first and second halves
+        merge_sort_in_place(arr, l, m)
+        merge_sort_in_place(arr, m + 1, r)
 
-        merge_in_place(arr, l, mid, r)
-        
-
-
-
-
-    # pivot = arr[l]
-
-    # i = l + 1
-    # j = l + 1
-
-    # while j <= r:
-    #     if arr[j] <= pivot:
-    #         arr[j], arr[i] = arr[i], arr[j]
-        
-    #     j += 1
-    
-    # arr[l], arr[i - 1] = arr[i-1], arr[l]
-
-   
-
-
+        merge_in_place(arr, l, m, r)
 
     return arr
+
 
 
 # STRETCH: implement the Timsort function below
